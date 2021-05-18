@@ -30,6 +30,7 @@
         input {
             width: 150px;
             margin: 0 auto 20px auto;
+            color: v.$blue;
         }
         button {
             @include v.button1(0, v.$red, v.$font2);

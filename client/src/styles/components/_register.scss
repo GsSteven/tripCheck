@@ -1,0 +1,55 @@
+@use './../variables' as v;
+
+.registerWrapper{
+    form {
+        @include v.flex(center, space-around, column);
+        position: relative;
+        background-color: v.$transparent-blue;
+        width: 600px;
+        min-height: 400px;
+        margin: 0 auto;
+        border: 1px solid black;
+        border-radius: 3px;
+        h1 {
+            position: absolute;
+            top: 5px;
+            left: 0;
+            right: 0;
+            margin: 0 auto;
+            text-align: center;
+            color: v.$red;
+            font-family: v.$font1;
+            font-size: 40px;
+        }
+        label {
+            color: v.$red;
+            font-family: v.$font2;
+            text-align: center;
+        }
+        input {
+            width: 150px;
+            margin: 0 auto 20px auto;
+            color: v.$blue;
+        }
+        button {
+            @include v.button1(0, v.$red, v.$font2);
+            width: 55px;
+            height: 25px;
+            margin: 0 auto;
+        }
+        a {
+            background-color: v.$transparent-coral;
+            color: v.$red;
+            font-size: 15px;
+            font-family: v.$font2;
+            margin: 0 auto 5px auto;
+            padding: 2.5px 0;
+            text-align: center;
+            margin-top: 40px;
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0px;
+        }
+    }
+}

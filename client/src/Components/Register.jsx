@@ -8,7 +8,8 @@ export default function Register() {
   const [password2, setPassword2] = useState("");
   const [errors, setErrors] = useState("");
 
-  const registerUser = () => {
+  const registerUser = (e) => {
+    if (e) e.preventDefault();
     //check passwords are correct
     if (password !== password2) {
       setErrors("Passwords do not match");
@@ -21,10 +22,20 @@ export default function Register() {
     });
   };
 
+  const handleKeyPress = (e) => {
+    if (e.charCode === 13) registerUser();
+  };
+
   return (
     <div className="registerWrapper">
-      <form onSubmit={registerUser} className="className">
-        <h1>Trip Check</h1>
+      <form
+        onSubmit={registerUser}
+        className="className"
+        onKeyPress={handleKeyPress}
+      >
+        <h1>
+          <u>Trip Check</u>
+        </h1>
         <label htmlFor="name">Name</label>
         <input
           type="text"

@@ -6,13 +6,24 @@ export default function Login() {
   const [password, setPassword] = useState("");
 
   const submitUser = (e) => {
+    if (e) e.preventDefault();
     loginUser({ email, password });
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.charCode === 13) submitUser();
   };
 
   return (
     <div className="loginWrapper">
-      <form onSubmit={submitUser} className="className">
-        <h1>Trip Check</h1>
+      <form
+        onSubmit={submitUser}
+        className="className"
+        onKeyPress={handleKeyPress}
+      >
+        <h1>
+          <u>Trip Check</u>
+        </h1>
         <label htmlFor="email">Email</label>
         <input
           type="email"
