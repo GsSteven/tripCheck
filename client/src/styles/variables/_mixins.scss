@@ -1,0 +1,35 @@
+
+@mixin flex($justify, $align, $direction) {
+    display: flex;
+    justify-content: $justify;
+    align-items: $align;
+    @if $direction {
+        flex-direction: $direction;
+    }
+}
+
+@mixin center-background-image($path) {
+    background-image: url($path);
+    background-position: center;
+    background-size: cover;
+}
+
+@mixin button1($color1, $color2, $font) {
+    font-family: $font;
+    background-color: transparent;
+    @if $color1 {
+        background-color: $color1;
+    }
+    color: $color2;
+    border: 2px solid $color2;
+    border-radius: 2px;
+    transition: .3s linear;
+    cursor: pointer;
+    @if $color1 {
+        &:hover {
+            background-color: transparent;
+            border: 2px solid $color1;
+            color: $color1; 
+        }
+    }
+}
