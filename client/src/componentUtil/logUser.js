@@ -4,10 +4,10 @@ const axios = require('axios');
 //sets default axios header and saves token to local storage
 export const setAuthToken = token => {
     if (token) {
-        localStorage.setItem("tripsListToken", token);
+        localStorage.setItem("tripCheckToken", token);
         axios.defaults.headers.common["Authorization"] = token;
     } else {
-        localStorage.removeItem("tripsListToken");
+        localStorage.removeItem("tripCheckToken");
         delete axios.defaults.headers.common["Authorization"];
     }
 }

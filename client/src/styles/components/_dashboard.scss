@@ -1,0 +1,15 @@
+@use './../variables' as v;
+
+.dashboardWrapper {
+    width: 100vw;
+    min-height: 100vh;
+}
+
+header {
+    text-align: center;
+    font-family: v.$font1;
+    color: v.$red;
+    font-size: 25px;
+    background-color: v.$transparent-yellow;
+    padding: 20px 0;
+}

@@ -1,7 +1,6 @@
 @use './../variables' as v;
 
-.loginWrapper,
-.registerWrapper {
+.loginWrapper{
     form {
         @include v.flex(center, space-around, column);
         position: relative;
