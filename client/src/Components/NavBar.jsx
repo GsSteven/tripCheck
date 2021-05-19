@@ -59,16 +59,12 @@ class NavBar extends React.Component {
           <div className="mobile3"></div>
         </div>
         <ul className="navList">
-          <a href="#myLists">
-            <li id="myLists" onClick={this.handleClick}>
-              My Lists
-            </li>
-          </a>
-          <a href="#newList">
-            <li id="newList" onClick={this.handleClick}>
-              New List
-            </li>
-          </a>
+          <li id="myLists" onClick={this.handleClick}>
+            My Lists
+          </li>
+          <li id="newList" onClick={this.handleClick}>
+            New List
+          </li>
         </ul>
       </div>
     );

@@ -1,0 +1,12 @@
+@use './../variables' as v;
+
+.listWrapper {
+    border: 1px solid v.$red;
+    border-radius: 2px;
+    margin: 15px auto;
+    width: 50%;
+    font-family: v.$font2;
+    text-align: center;
+    background-color: v.$transparent-yellow;
+    cursor: pointer;
+}

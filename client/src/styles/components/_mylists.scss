@@ -1,0 +1,17 @@
+@use './../variables' as v;
+
+.myListsWrapper {
+    width: 70%;
+    margin: 40px auto;
+    .listsHeader {
+        text-align: center;
+        font-family: v.$font2;
+        font-size: 40px;
+        color: v.$red;
+    }
+    .lists {
+        border: 1px solid v.$yellow;
+        border-radius: 2px;
+        background-color: v.$transparent-blue;
+    }
+}

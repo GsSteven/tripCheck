@@ -1,0 +1,52 @@
+@use './../variables' as v;
+
+.newListWrapper {
+    margin: 40px auto;
+    .listsHeader {
+        text-align: center;
+        font-family: v.$font2;
+        font-size: 40px;
+        color: v.$red;
+    }
+    form {
+        @include v.flex(center, center, column);
+        border: 1px solid v.$red;
+        border-radius: 2px;
+        margin: 15px auto;
+        padding: 10px 0;
+        width: 50%;
+        font-family: v.$font2;
+        text-align: center;
+        background-color: v.$transparent-yellow;
+        input {
+            margin-bottom: 10px;
+        }
+        .newItemBox{ 
+            @include v.flex(center, center, column);
+            position: relative;
+            padding: 0 30px;
+            .addItem {
+                @include v.button1(0, v.$red, v.$font1);
+                @include v.flex(center, center, 0);
+                border-radius: 2px;
+                font-weight: 900;
+                width: 20px;
+                height: 20px;
+                font-size: 20px;
+                margin-bottom: 10px;
+                position: absolute;
+                top: 22px;
+                right: 5px;
+            }
+        } 
+        .submitList {
+            @include v.button1(v.$light-blue, v.$red, v.$font1);
+            width: 80px;
+            height: 30px;
+            font-size: 16px;
+        }
+        .listItem {
+            border: 1px solid green;
+        }
+    }
+}
