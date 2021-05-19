@@ -46,7 +46,24 @@
             font-size: 16px;
         }
         .listItem {
-            border: 1px solid green;
+            position: relative;
+            padding: 0 17px;
+            margin: 2.5px 0;
+            list-style: none;
+            button {
+                width: 15px;
+                height: 15px;
+                font-size: 10px;
+                font-weight: 900;
+                color: v.$red;
+                outline: none;
+                border: none;
+                background-color: transparent;
+                position: absolute;
+                top: 3.5px;
+                right: 2.5px;
+                cursor: pointer;
+            }
         }
     }
 }

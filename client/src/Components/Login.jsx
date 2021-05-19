@@ -4,10 +4,17 @@ import { loginUser } from "./../componentUtil/logUser";
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errors, setErrors] = useState("");
 
-  const submitUser = (e) => {
+  const submitUser = async (e) => {
     if (e) e.preventDefault();
-    loginUser({ email, password });
+    const isLoggedIn = await loginUser({ email, password });
+    //set errors or push to dashboard
+    if (isLoggedIn.errors) {
+      setErrors(isLoggedIn.errors);
+    } else {
+      window.location.href = "./dashboard";
+    }
   };
 
   const handleKeyPress = (e) => {
@@ -47,6 +54,7 @@ export default function Login() {
           onChange={(e) => setPassword(e.target.value)}
         />
         <button type="submit">Login</button>
+        {errors && <p className="errors">{errors}</p>}
         <a href="./Register" className="registerLink">
           Register here
         </a>

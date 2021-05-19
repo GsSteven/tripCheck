@@ -1,17 +1,24 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 
 export default function NewList() {
+  const [listName, setListName] = useState("");
   const [currentList, setCurrentList] = useState([]);
-
-  const itemRef = useRef();
+  const [currentValue, setCurrentValue] = useState("");
 
   const getCurrentList = () => {
     const listElements = currentList.map((listItem, index) => {
-      console.log(currentList);
       return (
-        <li className="listItem" key={listItem + index}>
-          {listItem}
+        <li className="listItem" key={listItem.name + index}>
+          {listItem.name}
+          <button
+            className="removeItem"
+            title={`Remove ${listItem.name}`}
+            itemname={listItem.name}
+            onClick={removeItem}
+          >
+            X
+          </button>
         </li>
       );
     });
@@ -19,9 +26,17 @@ export default function NewList() {
   };
 
   const addItem = () => {
-    const input = itemRef.current;
-    let currentValue = input.value;
-    setCurrentList((...current) => [...current, currentValue]);
+    let newItem = { name: currentValue, checked: false };
+    setCurrentList((current) => [newItem, ...current]);
+    setCurrentValue("");
+  };
+
+  const removeItem = (e) => {
+    const toDelete = e.target.getAttribute("itemname");
+    const newCurrent = currentList.filter((item) => {
+      return item.name !== toDelete;
+    });
+    setCurrentList(newCurrent);
   };
 
   const handleKeyPress = (e) => {
@@ -30,6 +45,12 @@ export default function NewList() {
 
   const submitList = (e) => {
     e.preventDefault();
+    const payLoad = { listName, list: currentList };
+    /*
+    axios.post("/api/lists", payLoad).then((response) => {
+      console.log(response);
+    });
+    */
   };
 
   return (
@@ -39,14 +60,20 @@ export default function NewList() {
       </h1>
       <form className="newListForm" onSubmit={submitList} autoComplete="off">
         <label htmlFor="name">List Name</label>
-        <input type="text" name="name" id="name" />
+        <input
+          type="text"
+          name="name"
+          id="name"
+          onChange={(e) => setListName(e.target.value)}
+        />
         <div className="newItemBox">
           <label htmlFor="newItem">Add Item</label>
           <input
             type="text"
             name="newItem"
             id="newItem"
-            ref={itemRef}
+            value={currentValue}
+            onChange={(e) => setCurrentValue(e.target.value)}
             onKeyPress={handleKeyPress}
           />
           <button

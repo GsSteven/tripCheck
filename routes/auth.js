@@ -41,8 +41,7 @@ router.post('/register', async (req, res) => {
 
 router.post('/login', async (req, res) => {
     const userInfo = req.body;
-    const email = userInfo.email;
-    const password = userInfo.password;
+    const { email, password } = userInfo;
 
     //Validate user info
     const { error } = loginValidation(userInfo);

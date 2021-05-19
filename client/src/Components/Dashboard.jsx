@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import NavBar from "./NavBar";
 import MyLists from "./MyLists";
 import NewList from "./NewList";
@@ -16,6 +16,13 @@ export default function Dashboard() {
         console.error("Error a getCurrentPage switch");
     }
   };
+
+  useEffect(() => {
+    const token = localStorage.tripCheckToken;
+    if (!token) {
+      window.location.href = "./login";
+    }
+  }, []);
 
   return (
     <div className="dashboardWrapper">
