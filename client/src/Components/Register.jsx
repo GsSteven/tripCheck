@@ -18,7 +18,9 @@ export default function Register() {
 
     const payLoad = { name, email, password, password2 };
     axios.post("/api/auth/register", payLoad).then((response) => {
-      console.log(response);
+      if (response.status === 200) {
+        window.location.href = "./login";
+      }
     });
   };
 
@@ -41,6 +43,7 @@ export default function Register() {
           type="text"
           id="name"
           name="name"
+          required
           onChange={(e) => setName(e.target.value)}
         />
         <label htmlFor="email">Email</label>
@@ -48,6 +51,7 @@ export default function Register() {
           type="email"
           id="email"
           name="email"
+          required
           onChange={(e) => setEmail(e.target.value)}
         />
         <label htmlFor="password">Password</label>
@@ -55,6 +59,7 @@ export default function Register() {
           type="password"
           id="password"
           name="password"
+          required
           onChange={(e) => setPassword(e.target.value)}
         />
         <label htmlFor="password2">Confirm Password</label>
@@ -62,6 +67,7 @@ export default function Register() {
           type="password"
           id="password2"
           name="password2"
+          required
           onChange={(e) => setPassword2(e.target.value)}
         />
         <button type="submit">Register</button>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { loginUser } from "./../componentUtil/logUser";
 
 export default function Login() {
@@ -13,6 +13,12 @@ export default function Login() {
   const handleKeyPress = (e) => {
     if (e.charCode === 13) submitUser();
   };
+
+  useEffect(() => {
+    if (localStorage.tripsListToken) {
+      window.location.href = "./dashboard";
+    }
+  }, []);
 
   return (
     <div className="loginWrapper">
@@ -29,6 +35,7 @@ export default function Login() {
           type="email"
           id="email"
           name="email"
+          required
           onChange={(e) => setEmail(e.target.value)}
         />
         <label htmlFor="email">Password</label>
@@ -36,6 +43,7 @@ export default function Login() {
           type="password"
           id="password"
           name="password"
+          required
           onChange={(e) => setPassword(e.target.value)}
         />
         <button type="submit">Login</button>
