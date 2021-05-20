@@ -65,5 +65,18 @@
                 cursor: pointer;
             }
         }
+        .successMessage,
+        .errorMessage {
+            margin-top: 10px;
+            padding: 0 10px;
+            border-radius: 3px;
+        }
+        .successMessage {
+            background-color: v.$transparent-green;
+        }
+        .errorMessage {
+            background-color: v.$transparent-red;
+
+        }
     }
 }

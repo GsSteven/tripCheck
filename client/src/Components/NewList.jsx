@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-export default function NewList() {
+export default function NewList({ refresh }) {
   const [listName, setListName] = useState("");
   const [currentList, setCurrentList] = useState([]);
   const [currentValue, setCurrentValue] = useState("");
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState(false);
 
   const getCurrentList = () => {
     const listElements = currentList.map((listItem, index) => {
@@ -40,17 +42,33 @@ export default function NewList() {
   };
 
   const handleKeyPress = (e) => {
-    if (e.charCode === 13) addItem();
+    if (e.charCode === 13) {
+      e.preventDefault();
+      addItem();
+    }
   };
 
   const submitList = (e) => {
     e.preventDefault();
     const payLoad = { listName, list: currentList };
-    /*
-    axios.post("/api/lists", payLoad).then((response) => {
-      console.log(response);
-    });
-    */
+
+    axios
+      .post("/api/lists", payLoad)
+      .then((response) => {
+        if (response.status === 200) {
+          setSuccess(true);
+          setError(false);
+          setTimeout(() => setSuccess(false), 3000);
+          setCurrentList([]);
+          setListName("");
+          refresh();
+        }
+      })
+      .catch((error) => {
+        if (error) {
+          setError(true);
+        }
+      });
   };
 
   return (
@@ -64,6 +82,7 @@ export default function NewList() {
           type="text"
           name="name"
           id="name"
+          value={listName}
           onChange={(e) => setListName(e.target.value)}
         />
         <div className="newItemBox">
@@ -88,6 +107,8 @@ export default function NewList() {
         <button type="submit" className="submitList">
           Submit List
         </button>
+        {success && <p className="successMessage">List has been added!</p>}
+        {error && <p className="errorMessage">ERROR: List was not added</p>}
         <ul>{getCurrentList()}</ul>
       </form>
     </div>

@@ -1,0 +1,26 @@
+@use './../variables' as v;
+
+.expandedListWrapper {
+    width: 100vw;
+    min-height: 100vh;
+    border: 1px solid v.$red;
+    background-color: v.$light-grey;
+    margin: 0 auto;
+    cursor: default;
+    button {
+        @include v.button1(0, v.$red, v.$font2);
+        width: 25px;
+        height: 25px;
+        font-weight: 900;
+        position: absolute;
+        right: 50px; 
+        top: 10px;
+    }
+    .expandedList {
+        ul{
+            li{
+                list-style-position: inside;
+            }
+        }
+    }
+}

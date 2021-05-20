@@ -18,11 +18,15 @@ export default function Login() {
   };
 
   const handleKeyPress = (e) => {
-    if (e.charCode === 13) submitUser();
+    if (e.charCode === 13) {
+      e.preventDefault();
+      submitUser();
+    }
   };
 
   useEffect(() => {
-    if (localStorage.tripsListToken) {
+    //if token exists push to dashboard
+    if (localStorage.tripCheckToken) {
       window.location.href = "./dashboard";
     }
   }, []);
