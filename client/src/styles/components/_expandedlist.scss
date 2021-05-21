@@ -1,12 +1,15 @@
 @use './../variables' as v;
 
 .expandedListWrapper {
-    width: 100vw;
-    min-height: 100vh;
+    position: absolute;
+    left: 0;
+    right: 0;
+    width: 50%;
     border: 1px solid v.$red;
     background-color: v.$light-grey;
     margin: 0 auto;
     cursor: default;
+    transform: translateY(-40px);
     button {
         @include v.button1(0, v.$red, v.$font2);
         width: 25px;
@@ -19,7 +22,33 @@
     .expandedList {
         ul{
             li{
-                list-style-position: inside;
+                list-style: none;
+                margin-bottom: 5px;
+                input {
+                    margin-right: 5px;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .expandedListWrapper {
+        width: 100%;
+        border-left: none;
+        border-right: none;
+        button {
+            right: 20px;
+        }
+        .expandedList {
+            ul{
+                li{
+                    list-style: none;
+                    margin-bottom: 10px;
+                    input {
+                        margin-right: 10px;
+                    }
+                }
             }
         }
     }

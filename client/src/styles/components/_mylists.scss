@@ -2,6 +2,7 @@
 
 .myListsWrapper {
     width: 70%;
+    min-height: 500px;
     margin: 40px auto;
     .listsHeader {
         text-align: center;
@@ -13,5 +14,15 @@
         border: 1px solid v.$yellow;
         border-radius: 2px;
         background-color: v.$transparent-blue;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .myListsWrapper {
+        width: 100%;
+        .lists {
+            border-left: none;
+            border-right: none;
+        }
     }
 }

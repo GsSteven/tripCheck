@@ -80,3 +80,13 @@
         }
     }
 }
+
+@media screen and (max-width: 600px) {
+    .newListWrapper {
+        form {
+            width: 100%;
+            border-left: none;
+            border-right: none;
+        }
+    }
+}

@@ -5,8 +5,8 @@ export default function NewList({ refresh }) {
   const [listName, setListName] = useState("");
   const [currentList, setCurrentList] = useState([]);
   const [currentValue, setCurrentValue] = useState("");
-  const [success, setSuccess] = useState(false);
-  const [error, setError] = useState(false);
+  const [success, setSuccess] = useState("");
+  const [error, setError] = useState("");
 
   const getCurrentList = () => {
     const listElements = currentList.map((listItem, index) => {
@@ -28,9 +28,18 @@ export default function NewList({ refresh }) {
   };
 
   const addItem = () => {
-    let newItem = { name: currentValue, checked: false };
-    setCurrentList((current) => [newItem, ...current]);
-    setCurrentValue("");
+    //check item is not already on list
+    const itemExists =
+      currentList.findIndex((item) => item.name === currentValue) !== -1;
+    if (itemExists) {
+      setError(`${currentValue} is already on this list`);
+    } else {
+      //add item and reset input value
+      let newItem = { name: currentValue, checked: false };
+      setCurrentList((current) => [newItem, ...current]);
+      setCurrentValue("");
+      setError("");
+    }
   };
 
   const removeItem = (e) => {
@@ -55,10 +64,11 @@ export default function NewList({ refresh }) {
     axios
       .post("/api/lists", payLoad)
       .then((response) => {
+        //set success message for 3 seconds then reset inputs
         if (response.status === 200) {
-          setSuccess(true);
-          setError(false);
-          setTimeout(() => setSuccess(false), 3000);
+          setSuccess(response.data);
+          setError("");
+          setTimeout(() => setSuccess(""), 3000);
           setCurrentList([]);
           setListName("");
           refresh();
@@ -66,7 +76,8 @@ export default function NewList({ refresh }) {
       })
       .catch((error) => {
         if (error) {
-          setError(true);
+          //display error
+          setError(error.response.data);
         }
       });
   };
@@ -107,8 +118,8 @@ export default function NewList({ refresh }) {
         <button type="submit" className="submitList">
           Submit List
         </button>
-        {success && <p className="successMessage">List has been added!</p>}
-        {error && <p className="errorMessage">ERROR: List was not added</p>}
+        {success && <p className="successMessage">{success}</p>}
+        {error && <p className="errorMessage">{error}</p>}
         <ul>{getCurrentList()}</ul>
       </form>
     </div>

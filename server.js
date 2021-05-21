@@ -13,6 +13,7 @@ const PORT = process.env.PORT || 8080;
 //imported routes
 const authRoute = require('./routes/auth');
 const listRoute = require('./routes/lists');
+const expandedListRoute = require('./routes/expandedList');
 
 //mongo connect
 mongoose.connect(MONGO_URI || 'mongodb://localhost/tripCheck', {
@@ -37,6 +38,7 @@ app.use(cors());
 //route middleware
 app.use('/api/auth', authRoute);
 app.use('/api/lists', listRoute);
+app.use('/api/expandedList', expandedListRoute);
 
 //for production app
 if (process.env.NODE_ENV === 'production') {

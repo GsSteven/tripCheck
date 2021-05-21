@@ -20,13 +20,19 @@ router.post('', verifyToken, (req, res) => {
 
     User.findById(id)
         .then(response => {
-            response.lists.unshift(data);
-            response.save();
-            res.sendStatus(200);
+            //check name does not exist
+            const nameExists = response.lists.findIndex(list => list.listName === data.listName) !== -1;
+            if (nameExists) {
+                res.status(409).send(`List name ${data.listName} already exists`);
+            } else {
+                response.lists.unshift(data);
+                response.save();
+                res.status(200).send(`${data.listName} has been added!`);
+            }
         })
         .catch(error => {
             console.error(error);
-            res.sendStatus(400);
+            res.status(400).send(`Error: ${data.listName} was not added`);
         })
 });
 

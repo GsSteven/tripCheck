@@ -1,7 +1,5 @@
 import React from "react";
 import List from "./List";
-import ExpandedList from "./ExpandedList";
-import { BrowserRouter as Router, Route } from "react-router-dom";
 
 export default function MyLists(props) {
   const displayLists = () => {
@@ -10,26 +8,12 @@ export default function MyLists(props) {
         <List
           name={list.listName}
           items={list.list}
+          refresh={props.refresh}
           key={list.listName + list.list.length}
         />
       );
     });
     return currentLists;
-  };
-
-  const getRoutes = () => {
-    const currentRoutes = props.lists.map((list, index) => {
-      return (
-        <Route
-          exact
-          path={`./MyLists/${list.listName}`}
-          key={list.listName + index}
-        >
-          <ExpandedList name={list.listName} items={list.list} />
-        </Route>
-      );
-    });
-    return currentRoutes;
   };
 
   return (
@@ -38,7 +22,6 @@ export default function MyLists(props) {
         <u>My Lists</u>
       </h1>
       <div className="lists">{displayLists()}</div>
-      <Router>{getRoutes()}</Router>
     </div>
   );
 }

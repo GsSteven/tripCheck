@@ -1,24 +1,46 @@
 import React from "react";
+import axios from "axios";
 
-export default function ExpandedList({ name, items }) {
+export default function ExpandedList({ name, items, close, refresh }) {
   const displayItems = () => {
     const listElements = items.map((item, index) => {
       return (
         <li className="expandedItem" key={item.name + index}>
-          {item.name}{" "}
           <input
             type="checkbox"
             id={`${item.name}Checkbox`}
+            name={item.name}
             defaultChecked={item.checked}
-          />{" "}
+            onClick={markChecked}
+          />
+          {item.name}
         </li>
       );
     });
     return listElements;
   };
 
+  const markChecked = (e) => {
+    const payLoad = {
+      name,
+      itemName: e.target.name,
+      checked: e.target.checked,
+    };
+    axios
+      .post("./api/expandedList", payLoad)
+      .then((response) => {
+        if (response.status === 200) refresh();
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
   return (
     <div className="expandedListWrapper">
+      <button className="closeButton" onClick={() => close()}>
+        X
+      </button>
       <div className="expandedList">
         <h1>
           <u>{name}</u>
