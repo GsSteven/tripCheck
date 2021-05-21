@@ -9,9 +9,22 @@
     text-align: center;
     background-color: v.$transparent-yellow;
     cursor: pointer;
+
+    .expandedContainer {
+        button {
+            @include v.button1(0, v.$red, v.$font2);
+            width: 25px;
+            height: 25px;
+            font-weight: 900;
+            position: relative;
+            top: -70px;
+            left: 60%;
+            z-index: 15;
+        }
+    }
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 800px) {
     .listWrapper {
         width: 90%;
     }

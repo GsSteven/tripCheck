@@ -9,6 +9,7 @@ export default function MyLists(props) {
           name={list.listName}
           items={list.list}
           refresh={props.refresh}
+          toggleShade={props.toggleShade}
           key={list.listName + list.list.length}
         />
       );

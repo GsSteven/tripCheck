@@ -1,9 +1,12 @@
 @use './../variables' as v;
 
+
 .myListsWrapper {
     width: 70%;
     min-height: 500px;
-    margin: 40px auto;
+    margin: 0 auto;
+    padding: 40px 0;
+    z-index: 2;
     .listsHeader {
         text-align: center;
         font-family: v.$font2;
@@ -17,7 +20,13 @@
     }
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 1200px) {
+    .myListsWrapper {
+        width: 95%;
+    }
+}
+
+@media screen and (max-width: 800px) {
     .myListsWrapper {
         width: 100%;
         .lists {

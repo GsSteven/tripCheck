@@ -6,14 +6,17 @@ export default function ExpandedList({ name, items, close, refresh }) {
     const listElements = items.map((item, index) => {
       return (
         <li className="expandedItem" key={item.name + index}>
-          <input
-            type="checkbox"
-            id={`${item.name}Checkbox`}
-            name={item.name}
-            defaultChecked={item.checked}
-            onClick={markChecked}
-          />
-          {item.name}
+          <label className="checkContainer">
+            <input
+              type="checkbox"
+              id={`${item.name}Checkbox`}
+              name={item.name}
+              defaultChecked={item.checked}
+              onClick={markChecked}
+            />
+            <span className="checkMark"></span>
+          </label>
+          <p className="expandedItemName">{item.name}</p>
         </li>
       );
     });
@@ -38,9 +41,6 @@ export default function ExpandedList({ name, items, close, refresh }) {
 
   return (
     <div className="expandedListWrapper">
-      <button className="closeButton" onClick={() => close()}>
-        X
-      </button>
       <div className="expandedList">
         <h1>
           <u>{name}</u>

@@ -33,7 +33,7 @@ function App() {
         <Switch>
           <Route exact path="/dashboard" component={Dashboard} />
         </Switch>
-        <p className="attributeAuthor">
+        <p id="attributeAuthor">
           Photo by{" "}
           <a href="https://unsplash.com/@glenncarstenspeters?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">
             Glenn Carstens-Peters
