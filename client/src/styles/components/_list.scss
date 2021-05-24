@@ -4,6 +4,7 @@
     border: 1px solid v.$red;
     border-radius: 2px;
     margin: 15px auto;
+    max-height: 35px;
     width: 50%;
     font-family: v.$font2;
     text-align: center;
@@ -11,14 +12,21 @@
     cursor: pointer;
 
     .expandedContainer {
+        position: relative;
+        top: 50%;
+        left: 50%;
+        height: 600px;
+        width: 700px;
+        transform: translate(-50%, -50%);
+        z-index: 10;
         button {
             @include v.button1(0, v.$red, v.$font2);
             width: 25px;
             height: 25px;
             font-weight: 900;
             position: relative;
-            top: -70px;
-            left: 60%;
+            top: 35px;
+            left: 40%;
             z-index: 15;
         }
     }

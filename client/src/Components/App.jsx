@@ -1,3 +1,4 @@
+import React, { useRef } from "react";
 import "./../css/style.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { setAuthToken, logoutUser } from "./../componentUtil/logUser";
@@ -24,6 +25,20 @@ if (localStorage.tripCheckToken) {
 }
 
 function App() {
+  const shadeRef = useRef();
+
+  const toggleBackgroundShade = () => {
+    const backgroundShade = shadeRef.current;
+
+    if (backgroundShade.style.backgroundColor === "rgba(0, 0, 0, 0.7)") {
+      backgroundShade.style.backgroundColor = "transparent";
+      backgroundShade.style.pointerEvents = "none";
+    } else {
+      backgroundShade.style.backgroundColor = "rgba(0, 0, 0, 0.7)";
+      backgroundShade.style.pointerEvents = "auto";
+    }
+  };
+
   return (
     <Router>
       <div className="appWrapper">
@@ -31,7 +46,9 @@ function App() {
         <Route exact path="/login" component={Login} />
         <Route exact path="/register" component={Register} />
         <Switch>
-          <Route exact path="/dashboard" component={Dashboard} />
+          <Route exact path="/dashboard">
+            <Dashboard toggleBackgroundShade={toggleBackgroundShade} />
+          </Route>
         </Switch>
         <p id="attributeAuthor">
           Photo by{" "}
@@ -43,6 +60,7 @@ function App() {
             Unsplash
           </a>
         </p>
+        <div className="backgroundShade" ref={shadeRef}></div>
       </div>
     </Router>
   );
