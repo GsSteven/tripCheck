@@ -33,8 +33,8 @@ export default function NewList({ refresh }) {
       currentList.findIndex((item) => item.name === currentValue) !== -1;
     if (itemExists) {
       setError(`${currentValue} is already on this list`);
-    } else if (currentValue.length > 30) {
-      setError("Items can not be longer than 30 characters");
+    } else if (currentValue.length > 50) {
+      setError("Items can not be longer than 50 characters");
     } else {
       //add item and reset input value
       let newItem = { name: currentValue, checked: false };

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { logoutUser } from "./../componentUtil/logUser";
 import NavBar from "./NavBar";
 import MyLists from "./MyLists";

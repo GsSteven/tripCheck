@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-export default function ExpandedList({ name, items, close, refresh }) {
+export default function ExpandedList({ name, items, refresh }) {
+  const [errors, setErrors] = useState("");
+
   const displayItems = () => {
     const listElements = items.map((item, index) => {
       return (
@@ -39,9 +41,28 @@ export default function ExpandedList({ name, items, close, refresh }) {
       });
   };
 
+  const uncheckAll = () => {
+    axios
+      .post("./api/expandedList/reset", { name })
+      .then((response) => {
+        if (response.status === 200) {
+          refresh();
+        }
+      })
+      .catch((error) => {
+        if (error) {
+          setErrors("Error: List not reset");
+        }
+      });
+  };
+
   return (
     <div className="expandedListWrapper">
       <div className="expandedList">
+        <button type="button" className="resetListButton" onClick={uncheckAll}>
+          Reset
+        </button>
+        {errors && <p className="listErrors">{errors}</p>}
         <h1>
           <u>{name}</u>
         </h1>

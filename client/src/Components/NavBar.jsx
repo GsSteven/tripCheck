@@ -1,22 +1,20 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 
-class NavBar extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      clicked: false,
-    };
-    this.expandNav = this.expandNav.bind(this);
-    this.handleClick = this.handleClick.bind(this);
-  }
+function NavBar(props) {
+  const [clicked, setClicked] = useState(false);
 
-  expandNav(e) {
-    const navList = document.querySelector(".navList");
-    const line1 = document.querySelector(".mobile1");
-    const line2 = document.querySelector(".mobile2");
-    const line3 = document.querySelector(".mobile3");
+  const mobile1 = useRef();
+  const mobile2 = useRef();
+  const mobile3 = useRef();
+  const navRef = useRef();
 
-    if (!this.state.clicked) {
+  const expandNav = (e) => {
+    const navList = navRef.current;
+    const line1 = mobile1.current;
+    const line2 = mobile2.current;
+    const line3 = mobile3.current;
+
+    if (!clicked) {
       //show nav
       navList.style.opacity = "1";
       navList.style.pointerEvents = "auto";
@@ -28,7 +26,7 @@ class NavBar extends React.Component {
       line3.style.transform = "rotate(-45deg) translateY(-19px)";
       line1.style.backgroundColor = "rgb(126, 7, 7)";
       line3.style.backgroundColor = "rgb(126, 7, 7)";
-      this.setState({ clicked: true });
+      setClicked(true);
     } else {
       //hide nav
       navList.style.opacity = "0";
@@ -41,34 +39,32 @@ class NavBar extends React.Component {
       line3.style.transform = "";
       line1.style.backgroundColor = "black";
       line3.style.backgroundColor = "black";
-      this.setState({ clicked: false });
+      setClicked(false);
     }
-  }
+  };
 
-  handleClick(e) {
+  const handleClick = (e) => {
     const value = e.target.id;
-    this.props.setCurrentPage(value);
-  }
+    props.setCurrentPage(value);
+  };
 
-  render() {
-    return (
-      <div id="navWrapper">
-        <div className="mobileOptions" onClick={this.expandNav}>
-          <div className="mobile1"></div>
-          <div className="mobile2"></div>
-          <div className="mobile3"></div>
-        </div>
-        <ul className="navList">
-          <li id="myLists" onClick={this.handleClick}>
-            My Lists
-          </li>
-          <li id="newList" onClick={this.handleClick}>
-            New List
-          </li>
-        </ul>
+  return (
+    <div id="navWrapper">
+      <div className="mobileOptions" onClick={expandNav}>
+        <div ref={mobile1} className="mobile1"></div>
+        <div ref={mobile2} className="mobile2"></div>
+        <div ref={mobile3} className="mobile3"></div>
       </div>
-    );
-  }
+      <ul ref={navRef} className="navList">
+        <li id="myLists" onClick={handleClick}>
+          My Lists
+        </li>
+        <li id="newList" onClick={handleClick}>
+          New List
+        </li>
+      </ul>
+    </div>
+  );
 }
 
 export default NavBar;

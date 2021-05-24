@@ -10,7 +10,6 @@
     text-align: center;
     background-color: v.$transparent-yellow;
     cursor: pointer;
-
     .expandedContainer {
         position: relative;
         top: 50%;
@@ -19,7 +18,8 @@
         width: 700px;
         transform: translate(-50%, -50%);
         z-index: 10;
-        button {
+        cursor: default;
+        .closeButton {
             @include v.button1(0, v.$red, v.$font2);
             width: 25px;
             height: 25px;
@@ -28,12 +28,16 @@
             top: 35px;
             left: 40%;
             z-index: 15;
+            cursor: pointer;
         }
     }
 }
 
 @media screen and (max-width: 800px) {
     .listWrapper {
-        width: 90%;
+        width: 100%;
+        .expandedContainer {
+            width: 100%;
+        }
     }
 }
