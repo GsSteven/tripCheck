@@ -7,4 +7,50 @@
     cursor: default;
     overflow-x: hidden;
     overflow-y: scroll;
+    padding-bottom: 10px;
+    .addToEditContainer {
+        @include v.flex(center, center, 0);
+        width: 300px;
+        margin: 0 auto 10px auto;
+        transform: translateX(10px);
+        .addToEdit {
+            background-color: v.$transparent-green;
+            margin-right: 5px;
+        }
+        .addToEditButton {
+            @include v.flex(center, center, 0);
+            @include v.button1(0, v.$transparent-green, v.$font1);
+            width: 20px;
+            height: 20px;
+            font-size: 20px;
+            font-weight: 900;
+        }
+    }
+    .newAddsList {
+        @include v.flex(flex-start, center, column);
+        input {
+            margin-bottom: 10px;
+            text-align: center;
+            background-color: v.$transparent-green;
+            font-family: v.$font2;
+            font-weight: 600;
+        }
+    }
+    .editList {
+        @include v.flex(flex-start, center, column);
+        max-height: 600px;
+        input {
+            margin-bottom: 10px;
+            text-align: center;
+            background-color: v.$transparent-yellow;
+            font-family: v.$font2;
+            font-weight: 600;
+        }
+    }
+    .saveEdit {
+        @include v.button1(v.$transparent-green, black, v.$font2);
+        font-size: 18px;
+        padding: 0 5px;
+        border-radius: 3px;
+    }
 }
