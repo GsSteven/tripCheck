@@ -8,6 +8,10 @@ router.get('', verifyToken, (req, res) => {
 });
 
 router.post('', verifyToken, (req, res) => {
+
+});
+
+router.put('', verifyToken, (req, res) => {
     const id = req.user._id;
     const { name, itemName, checked } = req.body;
     User.findById(id)
@@ -27,12 +31,23 @@ router.post('', verifyToken, (req, res) => {
         });
 });
 
-router.put('', verifyToken, (req, res) => {
-
-});
-
 router.delete('', verifyToken, (req, res) => {
-
+    const id = req.user._id;
+    const listToDelete = req.query.name;
+    User.findById(id)
+        .then(response => {
+            const listIndex = response.lists.findIndex(list => {
+                return list.listName === listToDelete;
+            });
+            response.lists.splice(listIndex, 1);
+            response.markModified('lists');
+            response.save();
+            res.sendStatus(200);
+        })
+        .catch(error => {
+            console.error(error);
+            res.sendStatus(400);
+        });
 });
 
 //post to reset list

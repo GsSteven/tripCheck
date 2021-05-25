@@ -1,8 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 
-export default function ExpandedList({ name, items, refresh }) {
+export default function ExpandedList({
+  name,
+  items,
+  refresh,
+  close,
+  openEdit,
+}) {
   const [errors, setErrors] = useState("");
+  const [showDelete, setShowDelete] = useState(false);
+
+  const toggleDeleteList = () => {
+    showDelete ? setShowDelete(false) : setShowDelete(true);
+  };
 
   const displayItems = () => {
     const listElements = items.map((item, index) => {
@@ -13,6 +24,7 @@ export default function ExpandedList({ name, items, refresh }) {
               type="checkbox"
               id={`${item.name}Checkbox`}
               name={item.name}
+              className="itemCheckbox"
               defaultChecked={item.checked}
               onClick={markChecked}
             />
@@ -26,18 +38,24 @@ export default function ExpandedList({ name, items, refresh }) {
   };
 
   const markChecked = (e) => {
+    //set input display
     const payLoad = {
       name,
       itemName: e.target.name,
       checked: e.target.checked,
     };
+    //update db data
     axios
-      .post("./api/expandedList", payLoad)
+      .put("./api/expandedList", payLoad)
       .then((response) => {
-        if (response.status === 200) refresh();
+        if (response.status === 200) {
+          setErrors("");
+        }
       })
       .catch((error) => {
-        console.error(error);
+        setErrors("Error: database not updated");
+        //if db update fails revert display back
+        e.target.checked = !e.target.checked;
       });
   };
 
@@ -45,8 +63,12 @@ export default function ExpandedList({ name, items, refresh }) {
     axios
       .post("./api/expandedList/reset", { name })
       .then((response) => {
+        //if good response uncheck all boxes
         if (response.status === 200) {
-          refresh();
+          const checkBoxes = document.getElementsByClassName("itemCheckbox");
+          for (let i = 0; i < checkBoxes.length; i++) {
+            checkBoxes[i].checked = false;
+          }
         }
       })
       .catch((error) => {
@@ -56,12 +78,70 @@ export default function ExpandedList({ name, items, refresh }) {
       });
   };
 
+  const deleteList = () => {
+    axios
+      .delete("./api/expandedList", { params: { name } })
+      .then((response) => {
+        if (response.status === 200) {
+          //toggle shade to close and refresh from db
+          close();
+          refresh();
+        }
+      })
+      .catch((error) => {
+        setErrors("Error: List not deleted");
+      });
+  };
+
   return (
     <div className="expandedListWrapper">
       <div className="expandedList">
-        <button type="button" className="resetListButton" onClick={uncheckAll}>
-          Reset
-        </button>
+        <div className="expandedListButtons">
+          <button
+            type="button"
+            className="resetListButton"
+            onClick={uncheckAll}
+            title="Uncheck everything"
+          >
+            Reset
+          </button>
+          <button
+            type="button"
+            className="editListButton"
+            title="Edit list"
+            onClick={() => openEdit()}
+          >
+            Edit
+          </button>
+          <button
+            type="button"
+            className="toggleDeleteButton"
+            title="Delete List"
+            onClick={toggleDeleteList}
+          >
+            Delete
+          </button>
+        </div>
+        {showDelete && (
+          <div className="deleteList">
+            <p className="deleteMessage">
+              Are you sure you want to delete <b>{name}</b> and <u>all</u> its
+              content?
+            </p>
+            <div className="confirmDeleteButtons">
+              <button type="button" className="yesDelete" onClick={deleteList}>
+                Yes
+              </button>
+              <button
+                type="button"
+                className="noDelete"
+                onClick={toggleDeleteList}
+              >
+                No
+              </button>
+            </div>
+          </div>
+        )}
         {errors && <p className="listErrors">{errors}</p>}
         <h1>
           <u>{name}</u>

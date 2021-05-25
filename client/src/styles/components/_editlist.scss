@@ -1,0 +1,10 @@
+@use './../variables' as v;
+
+.editListWrapper {
+    width: 100%;
+    border: 1px solid v.$red;
+    background-color: v.$light-grey;
+    cursor: default;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}

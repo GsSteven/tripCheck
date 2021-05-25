@@ -10,15 +10,49 @@
     
     .expandedList {
         cursor: default;
-        .resetListButton {
-            @include v.button1(v.$light-blue, v.$red, v.$font2);
-            position: relative;
-            top: 10px;
-            left: -40%;
-            width: 60px;
-            height: 25px;
-            font-size: 15px;
-            border-radius: 3px;
+        .expandedListButtons {
+            margin-top: 5px;
+            @include v.flex(space-around, center, 0);
+            width: 250px;
+            .resetListButton,
+            .editListButton,
+            .toggleDeleteButton {
+                width: 60px;
+                height: 25px;
+                font-size: 15px;
+                border-radius: 3px;
+            }
+            .resetListButton {
+                @include v.button1(v.$light-blue, v.$red, v.$font2);
+            }
+            .editListButton {
+                @include v.button1(v.$transparent-green, v.$blue, v.$font2);
+            }
+            .toggleDeleteButton {
+                @include v.button1(v.$red, black, v.$font2);
+            }
+        }
+        .deleteList {
+            margin-top: 2.5px;
+            background-color: v.$transparent-red;
+            .confirmDeleteButtons {
+                @include v.flex(space-around, center, 0);
+                width: 125px;
+                margin: 0 auto;
+                .yesDelete,
+                .noDelete {
+                    width: 50px;
+                    height: 20px;
+                    font-size: 13px;
+                    margin-bottom: 2.5px;
+                }
+                .yesDelete {
+                    @include v.button1(v.$red, black, v.$font2);
+                }
+                .noDelete {
+                    @include v.button1(v.$transparent-green, black, v.$font2);
+                }
+            }
         }
         h1 {
             width: 60%;
