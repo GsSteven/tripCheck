@@ -8,7 +8,36 @@ router.get('', verifyToken, (req, res) => {
 });
 
 router.post('', verifyToken, (req, res) => {
-
+    const id = req.user._id;
+    const { newListName, oldListName, changes, newItems } = req.body;
+    User.findById(id)
+        .then(response => {
+            const currentListIndex = response.lists.findIndex(list => list.listName === oldListName);
+            const currentList = response.lists[currentListIndex];
+            //set new name
+            if (newListName) currentList.listName = newListName;
+            //add new items list list array
+            if (newItems[0]) {
+                newItems.forEach(item => {
+                    currentList.list.unshift({ name: item, checked: false });
+                })
+            }
+            //add changes to list
+            if (changes[0]) {
+                changes.forEach(change => {
+                    const itemIndex = currentList.list.findIndex(item => item.name === change.oldValue);
+                    const currentItem = currentList.list[itemIndex];
+                    currentItem.name = change.value;
+                })
+            }
+            response.markModified('lists');
+            response.save();
+            res.sendStatus(200);
+        })
+        .catch(error => {
+            console.error(error);
+            res.sendStatus(400);
+        });
 });
 
 router.put('', verifyToken, (req, res) => {
@@ -32,22 +61,7 @@ router.put('', verifyToken, (req, res) => {
 });
 
 router.delete('', verifyToken, (req, res) => {
-    const id = req.user._id;
-    const listToDelete = req.query.name;
-    User.findById(id)
-        .then(response => {
-            const listIndex = response.lists.findIndex(list => {
-                return list.listName === listToDelete;
-            });
-            response.lists.splice(listIndex, 1);
-            response.markModified('lists');
-            response.save();
-            res.sendStatus(200);
-        })
-        .catch(error => {
-            console.error(error);
-            res.sendStatus(400);
-        });
+
 });
 
 //post to reset list

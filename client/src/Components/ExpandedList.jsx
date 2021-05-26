@@ -80,7 +80,7 @@ export default function ExpandedList({
 
   const deleteList = () => {
     axios
-      .delete("./api/expandedList", { params: { name } })
+      .delete("./api/lists", { params: { name } })
       .then((response) => {
         if (response.status === 200) {
           //toggle shade to close and refresh from db

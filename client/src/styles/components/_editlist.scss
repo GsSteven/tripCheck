@@ -8,11 +8,17 @@
     overflow-x: hidden;
     overflow-y: scroll;
     padding-bottom: 10px;
+    .editListName {
+        font-size: 30px;
+        font-family: v.$font2;
+        text-align: center;
+        margin: 10px 0;
+        background-color: v.$transparent-blue;
+    }
     .addToEditContainer {
         @include v.flex(center, center, 0);
         width: 300px;
         margin: 0 auto 10px auto;
-        transform: translateX(10px);
         .addToEdit {
             background-color: v.$transparent-green;
             margin-right: 5px;
@@ -26,25 +32,42 @@
             font-weight: 900;
         }
     }
-    .newAddsList {
-        @include v.flex(flex-start, center, column);
+    .displayErrors {
+        background-color: v.$transparent-red;
+        margin-bottom: 10px;
+    }
+    .newAddsList,
+    .editList {
         input {
             margin-bottom: 10px;
             text-align: center;
-            background-color: v.$transparent-green;
             font-family: v.$font2;
             font-weight: 600;
         }
+    }
+    .newAddsList {
+        @include v.flex(flex-start, center, column);
+        input {
+            background-color: v.$transparent-green;
+        }
+    }
+    .setDeleteItem {
+        width: 15px;
+        height: 15px;
+        outline: none;
+        border: none;
+        background-color: transparent;
+        cursor: pointer;
+        color: v.$red;
+        font-size: 20px;
+        font-weight: 900;
+        margin-left: 5px;
     }
     .editList {
         @include v.flex(flex-start, center, column);
         max-height: 600px;
         input {
-            margin-bottom: 10px;
-            text-align: center;
             background-color: v.$transparent-yellow;
-            font-family: v.$font2;
-            font-weight: 600;
         }
     }
     .saveEdit {
@@ -52,5 +75,6 @@
         font-size: 18px;
         padding: 0 5px;
         border-radius: 3px;
+        transform: translateX(-7.5px);
     }
 }
