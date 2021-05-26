@@ -21,6 +21,7 @@ export default function EditList({ name, items, refresh, close }) {
     } else {
       setNewItems((current) => {
         current[name] = value;
+        return current;
       });
     }
   };
@@ -54,7 +55,7 @@ export default function EditList({ name, items, refresh, close }) {
     //push object keys into array for mapping
     const newItemsArray = [];
     for (let thing in newItems) {
-      newItemsArray.push(newItems[thing]);
+      newItemsArray.unshift(newItems[thing]);
     }
 
     const itemInputs = newItemsArray.map((item, index) => {
@@ -88,9 +89,8 @@ export default function EditList({ name, items, refresh, close }) {
     for (let thing in changes) {
       changeValues.push(changes[thing].value);
     }
-
     for (let newThing in newItems) {
-      newValues.push(newItems[newThing]);
+      newValues.unshift(newItems[newThing]);
     }
 
     //check for item in new and existing items
@@ -124,6 +124,12 @@ export default function EditList({ name, items, refresh, close }) {
       newItemsArray.push(newItems[item]);
     }
     if (listName !== name) newListName = listName;
+
+    //if no changes have been made set error and return
+    if (!changesArray[0] && !newItemsArray[0] && !newListName) {
+      setErrors("No changes detected to list");
+      return;
+    }
     const payLoad = {
       newListName,
       oldListName: name,
@@ -134,7 +140,6 @@ export default function EditList({ name, items, refresh, close }) {
       .post("./api/expandedList", payLoad)
       .then((response) => {
         if (response.status === 200) {
-          refresh();
           close();
         }
       })
@@ -158,7 +163,10 @@ export default function EditList({ name, items, refresh, close }) {
           name="addToEdit"
           value={addNewValue}
           className="addToEdit"
-          onKeyPress={(e) => (e.code === "Enter" ? addToList() : "")}
+          autoComplete="off"
+          onKeyPress={(e) => {
+            if (e.code === "Enter") addToList();
+          }}
           onChange={(e) => setAddNewValue(e.target.value)}
         />
         <button

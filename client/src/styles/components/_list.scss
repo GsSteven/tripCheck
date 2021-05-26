@@ -12,7 +12,7 @@
     cursor: pointer;
     .expandedContainer,
     .editContainer {
-        position: relative;
+        position: fixed;
         top: 50%;
         left: 50%;
         height: 600px;
@@ -37,7 +37,8 @@
 @media screen and (max-width: 800px) {
     .listWrapper {
         width: 100%;
-        .expandedContainer {
+        .expandedContainer,
+        .editContainer {
             width: 100%;
         }
     }
