@@ -1,5 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import axios from "axios";
+
+//img imports
+import gearIcon from "./../images/gear.png";
 
 export default function ExpandedList({
   name,
@@ -10,9 +13,27 @@ export default function ExpandedList({
 }) {
   const [errors, setErrors] = useState("");
   const [showDelete, setShowDelete] = useState(false);
+  const [showButtons, setShowButtons] = useState(false);
+
+  const buttonsRef = useRef();
 
   const toggleDeleteList = () => {
     showDelete ? setShowDelete(false) : setShowDelete(true);
+  };
+
+  const expandButtons = () => {
+    const buttonsDiv = buttonsRef.current;
+    if (showButtons) {
+      buttonsDiv.style.width = 0;
+      buttonsDiv.style.opacity = 0;
+      buttonsDiv.style.pointerEvents = "none";
+      setShowButtons(false);
+    } else {
+      buttonsDiv.style.width = "250px";
+      buttonsDiv.style.opacity = 1;
+      buttonsDiv.style.pointerEvents = "auto";
+      setShowButtons(true);
+    }
   };
 
   const displayItems = () => {
@@ -96,7 +117,14 @@ export default function ExpandedList({
   return (
     <div className="expandedListWrapper">
       <div className="expandedList">
-        <div className="expandedListButtons">
+        <button
+          type="button"
+          className="toggleExpandedListButtons"
+          onClick={expandButtons}
+        >
+          <img src={gearIcon} alt="Alter List" title="Change List" />
+        </button>
+        <div className="expandedListButtons" ref={buttonsRef}>
           <button
             type="button"
             className="resetListButton"

@@ -42,7 +42,7 @@ export default function MyLists(props) {
         <u>My Lists</u>
       </h1>
       {props.lists[0] && (
-        <div>
+        <div className="lists">
           <input
             type="text"
             name="findMyList"
@@ -50,9 +50,7 @@ export default function MyLists(props) {
             placeholder="Find List"
             onChange={(e) => setQuery(e.target.value)}
           />
-          <div className="lists">
-            {query ? displayQueryLists() : displayLists()}
-          </div>
+          {query ? displayQueryLists() : displayLists()}
         </div>
       )}
     </div>

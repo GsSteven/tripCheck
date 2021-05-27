@@ -38,7 +38,7 @@ export default function NewList({ refresh }) {
     } else {
       //add item and reset input value
       let newItem = { name: currentValue, checked: false };
-      setCurrentList((current) => [newItem, ...current]);
+      setCurrentList((current) => [...current, newItem]);
       setCurrentValue("");
       setError("");
     }

@@ -20,6 +20,12 @@
         transform: translate(-50%, -50%);
         z-index: 10;
         cursor: default;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+        &::-webkit-scrollbar {
+        display: none;
+        }
+        
         .closeButton {
             @include v.button1(0, v.$red, v.$font2);
             width: 25px;

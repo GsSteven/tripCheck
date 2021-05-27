@@ -13,12 +13,6 @@
         font-size: 40px;
         color: v.$red;
     }
-    .findMyList {
-        font-size: 20px;
-        text-align: center;
-        margin: 0 auto 5px auto;
-        border: 1px solid v.$red;
-    }
     .lists {
         border: 1px solid v.$yellow;
         border-radius: 2px;
@@ -26,6 +20,14 @@
         max-height: 70vh;
         overflow-y: scroll;
         overflow-x: hidden;
+        .findMyList {
+            display: block;
+            font-size: 18px;
+            text-align: center;
+            margin: 5px auto;
+            border: 1px solid v.$red;
+            color: v.$red;
+        }
         -ms-overflow-style: none;
         scrollbar-width: none;
         &::-webkit-scrollbar {

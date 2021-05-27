@@ -7,6 +7,7 @@ export default function EditList({ name, items }) {
   const [newItems, setNewItems] = useState({});
   const [toDelete, setToDelete] = useState({});
   const [addNewValue, setAddNewValue] = useState("");
+  const [isSaved, setSaved] = useState(false);
   const [errors, setErrors] = useState("");
   const [success, setSuccess] = useState("");
 
@@ -163,7 +164,7 @@ export default function EditList({ name, items }) {
       !deleteArray[0] &&
       !newListName
     ) {
-      setErrors("No changes detected to list");
+      setErrors("No changes to list found");
       return;
     }
     const payLoad = {
@@ -178,6 +179,7 @@ export default function EditList({ name, items }) {
       .then((response) => {
         if (response.status === 200) {
           setSuccess("List has been edited!");
+          setSaved(true);
         }
       })
       .catch((error) => {
@@ -219,7 +221,12 @@ export default function EditList({ name, items }) {
       {success && <p className="displaySuccess">{success}</p>}
       <ul className="newAddsList">{displayNewInputs()}</ul>
       <ul className="editList">{displayEditInputs()}</ul>
-      <button type="button" className="saveEdit" onClick={uploadChanges}>
+      <button
+        type="button"
+        className="saveEdit"
+        onClick={uploadChanges}
+        disabled={isSaved}
+      >
         Save
       </button>
     </div>

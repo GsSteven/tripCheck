@@ -6,15 +6,38 @@
     border: 1px solid v.$red;
     background-color: v.$light-grey;
     cursor: default;
-    overflow-x: hidden;
+    position: relative;
     overflow-y: scroll;
+    overflow-x: hidden;
+    -ms-overflow-style: none;
+        scrollbar-width: none;
+        &::-webkit-scrollbar {
+            display: none;
+        }
     
     .expandedList {
         cursor: default;
+        .toggleExpandedListButtons {
+            width: 25px;
+            height: 25px;
+            position: absolute;
+            top: 10px;
+            left: 15px;
+            cursor: pointer;
+            border: none;
+            img {
+                width: 100%;
+                pointer-events: none;
+            }
+        }
         .expandedListButtons {
-            margin-top: 5px;
+            margin: 10px 0 0 35px;
             @include v.flex(space-around, center, 0);
             width: 250px;
+            width: 0;
+            opacity: 0;
+            pointer-events: none;
+            transition: .3s linear;
             .resetListButton,
             .editListButton,
             .toggleDeleteButton {
@@ -24,13 +47,13 @@
                 border-radius: 3px;
             }
             .resetListButton {
-                @include v.button1(v.$light-blue, black, v.$font2);
+                @include v.button1(v.$transparent-blue, black, v.$font2);
             }
             .editListButton {
                 @include v.button1(v.$transparent-green, black, v.$font2);
             }
             .toggleDeleteButton {
-                @include v.button1(v.$red, black, v.$font2);
+                @include v.button1(v.$transparent-red, black, v.$font2);
             }
         }
         .deleteList {

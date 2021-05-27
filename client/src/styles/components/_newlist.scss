@@ -60,9 +60,6 @@
                 outline: none;
                 border: none;
                 background-color: transparent;
-                position: absolute;
-                top: 3.5px;
-                right: 2.5px;
                 cursor: pointer;
             }
         }
@@ -79,15 +76,35 @@
             background-color: v.$transparent-red;
 
         }
+        ul {
+            margin-top: 5px;
+            width: 100%;
+            max-height: 500px;
+            overflow-y: scroll;
+            overflow-x: hidden;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+            &::-webkit-scrollbar {
+            display: none;
+            }
+        }
     }
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 1000px) {
     .newListWrapper {
+        margin: 5px auto;
+        .listsHeader {
+            font-size: 30px;
+        }
         form {
+            margin: 0;
             width: 100%;
             border-left: none;
             border-right: none;
+            ul {
+                max-height: 285px;
+            }
         }
     }
 }
