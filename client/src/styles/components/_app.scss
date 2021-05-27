@@ -4,6 +4,7 @@
     @include v.flex(center, center, row);
     @include v.center-background-image('./../images/background.jpg');
     width: 100%;
+    min-height: 100vh;
     height: 100%;
     background-color: v.$light-grey;
     #attributeAuthor {
