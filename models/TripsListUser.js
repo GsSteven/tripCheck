@@ -27,6 +27,6 @@ const userSchema = mongoose.Schema({
     }
 });
 
-const TripsListUser = mongoose.model("tripsListUser", userSchema);
+const TripCheckUser = mongoose.model("tripCheckUser", userSchema);
 
-module.exports = TripsListUser;
+module.exports = TripCheckUser;
