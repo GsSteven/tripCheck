@@ -1,13 +1,27 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { logoutUser } from "./../componentUtil/logUser";
 import NavBar from "./NavBar";
 import MyLists from "./MyLists";
 import NewList from "./NewList";
 import axios from "axios";
 
-export default function Dashboard({ toggleBackgroundShade }) {
+export default function Dashboard() {
   const [currentPage, setCurrentPage] = useState("myLists");
   const [lists, setLists] = useState([]);
+
+  const shadeRef = useRef();
+
+  const toggleBackgroundShade = () => {
+    const backgroundShade = shadeRef.current;
+
+    if (backgroundShade.style.backgroundColor === "rgba(0, 0, 0, 0.7)") {
+      backgroundShade.style.backgroundColor = "transparent";
+      backgroundShade.style.pointerEvents = "none";
+    } else {
+      backgroundShade.style.backgroundColor = "rgba(0, 0, 0, 0.7)";
+      backgroundShade.style.pointerEvents = "auto";
+    }
+  };
 
   const getCurrentPage = () => {
     switch (currentPage) {
@@ -58,6 +72,7 @@ export default function Dashboard({ toggleBackgroundShade }) {
       </header>
       <NavBar setCurrentPage={setCurrentPage} />
       {getCurrentPage()}
+      <div className="backgroundShade" ref={shadeRef}></div>
     </div>
   );
 }

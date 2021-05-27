@@ -9,13 +9,41 @@ router.get('', verifyToken, (req, res) => {
 
 router.post('', verifyToken, (req, res) => {
     const id = req.user._id;
-    const { newListName, oldListName, changes, newItems } = req.body;
+    const { name, itemName, checked } = req.body;
+    User.findById(id)
+        .then(response => {
+            const currentListIndex = response.lists.findIndex(list => list.listName === name);
+            const currentList = response.lists[currentListIndex].list;
+            const currentItemIndex = currentList.findIndex(item => item.name === itemName);
+            const currentItem = currentList[currentItemIndex];
+            currentItem.checked = checked;
+            response.markModified('lists');
+            response.save();
+            res.sendStatus(200);
+        })
+        .catch(error => {
+            console.error(error);
+            res.sendStatus(400);
+        });
+
+});
+
+router.put('', verifyToken, (req, res) => {
+    const id = req.user._id;
+    const { newListName, oldListName, changes, newItems, deletedItems } = req.body;
     User.findById(id)
         .then(response => {
             const currentListIndex = response.lists.findIndex(list => list.listName === oldListName);
             const currentList = response.lists[currentListIndex];
             //set new name
             if (newListName) currentList.listName = newListName;
+            //delete items
+            if (deletedItems[0]) {
+                deletedItems.forEach(item => {
+                    const itemIndex = currentList.list.findIndex(listItem => listItem.name === item);
+                    currentList.list.splice(itemIndex, 1);
+                })
+            }
             //add new items list list array
             if (newItems[0]) {
                 newItems.forEach(item => {
@@ -30,26 +58,6 @@ router.post('', verifyToken, (req, res) => {
                     currentItem.name = change.value;
                 })
             }
-            response.markModified('lists');
-            response.save();
-            res.sendStatus(200);
-        })
-        .catch(error => {
-            console.error(error);
-            res.sendStatus(400);
-        });
-});
-
-router.put('', verifyToken, (req, res) => {
-    const id = req.user._id;
-    const { name, itemName, checked } = req.body;
-    User.findById(id)
-        .then(response => {
-            const currentListIndex = response.lists.findIndex(list => list.listName === name);
-            const currentList = response.lists[currentListIndex].list;
-            const currentItemIndex = currentList.findIndex(item => item.name === itemName);
-            const currentItem = currentList[currentItemIndex];
-            currentItem.checked = checked;
             response.markModified('lists');
             response.save();
             res.sendStatus(200);

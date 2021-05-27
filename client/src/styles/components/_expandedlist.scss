@@ -2,6 +2,7 @@
 
 .expandedListWrapper {
     width: 100%;
+    height: 100%;
     border: 1px solid v.$red;
     background-color: v.$light-grey;
     cursor: default;
@@ -23,10 +24,10 @@
                 border-radius: 3px;
             }
             .resetListButton {
-                @include v.button1(v.$light-blue, v.$red, v.$font2);
+                @include v.button1(v.$light-blue, black, v.$font2);
             }
             .editListButton {
-                @include v.button1(v.$transparent-green, v.$blue, v.$font2);
+                @include v.button1(v.$transparent-green, black, v.$font2);
             }
             .toggleDeleteButton {
                 @include v.button1(v.$red, black, v.$font2);
@@ -137,6 +138,7 @@
         width: 100%;
         border-left: none;
         border-right: none;
+        overflow: default;
         button {
             right: 20px;
         }

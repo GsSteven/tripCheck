@@ -20,7 +20,9 @@ export default function List(props) {
     //close expand and open edit
     if (expandEdit) {
       setExpandEdit(false);
-      setExpandList(true);
+      setExpandList(false);
+      props.toggleShade();
+      props.refresh();
     } else {
       setExpandEdit(true);
       setExpandList(false);

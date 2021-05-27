@@ -46,7 +46,7 @@ export default function ExpandedList({
     };
     //update db data
     axios
-      .put("./api/expandedList", payLoad)
+      .post("./api/expandedList", payLoad)
       .then((response) => {
         if (response.status === 200) {
           setErrors("");

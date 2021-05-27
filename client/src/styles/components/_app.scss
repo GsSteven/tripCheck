@@ -4,10 +4,8 @@
     @include v.flex(center, center, row);
     @include v.center-background-image('./../images/background.jpg');
     width: 100%;
-    min-height: 100vh;
+    height: 100%;
     background-color: v.$light-grey;
-    overflow-y: visible;
-    overflow-x: hidden;
     #attributeAuthor {
         position: absolute;
         left: 0;
@@ -16,16 +14,5 @@
         a {
             color: v.$red;
         }
-    }
-    .backgroundShade {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        min-height: 100%;
-        z-index: 5;
-        pointer-events: none;
-        background-color: transparent;
-        transition: .3s linear;
     }
 }
