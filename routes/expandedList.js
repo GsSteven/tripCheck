@@ -44,18 +44,18 @@ router.put('', verifyToken, (req, res) => {
                     currentList.list.splice(itemIndex, 1);
                 })
             }
-            //add new items list list array
-            if (newItems[0]) {
-                newItems.forEach(item => {
-                    currentList.list.unshift({ name: item, checked: false });
-                })
-            }
             //add changes to list
             if (changes[0]) {
                 changes.forEach(change => {
                     const itemIndex = currentList.list.findIndex(item => item.name === change.oldValue);
                     const currentItem = currentList.list[itemIndex];
                     currentItem.name = change.value;
+                })
+            }
+            //add new items list list array
+            if (newItems[0]) {
+                newItems.forEach(item => {
+                    currentList.list.unshift({ name: item, checked: false });
                 })
             }
             response.markModified('lists');

@@ -25,6 +25,10 @@
             left: 15px;
             cursor: pointer;
             border: none;
+            background-color: transparent;
+            &:hover {
+                animation: rotation 3s infinite linear;
+            }
             img {
                 width: 100%;
                 pointer-events: none;
@@ -172,5 +176,14 @@
                 }
             }
         }
+    }
+}
+
+@keyframes rotation {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(359deg);
     }
 }
