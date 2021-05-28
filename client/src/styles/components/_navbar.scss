@@ -63,6 +63,7 @@
         right: 100%;
         top: 17px;
         background-color: v.$light-blue;
+        transition: right .3s linear;
         li {
             margin: 1em 0;
             &:hover::after {

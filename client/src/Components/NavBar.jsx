@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 
 function NavBar(props) {
   const [clicked, setClicked] = useState(false);
@@ -8,7 +8,7 @@ function NavBar(props) {
   const mobile3 = useRef();
   const navRef = useRef();
 
-  const expandNav = (e) => {
+  const expandNav = () => {
     const navList = navRef.current;
     const line1 = mobile1.current;
     const line2 = mobile2.current;
@@ -47,6 +47,16 @@ function NavBar(props) {
     const value = e.target.id;
     props.setCurrentPage(value);
   };
+
+  useEffect(() => {
+    //if nav bar is hidden and window is resized above mobile format, show nav bar
+    window.addEventListener("resize", () => {
+      if (window.innerWidth > 1000 && window.innerWidth < 1020 && !clicked) {
+        setClicked(true);
+        expandNav();
+      }
+    });
+  });
 
   return (
     <div id="navWrapper">
