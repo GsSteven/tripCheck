@@ -37,6 +37,14 @@
             height: 25px;
             margin: 0 auto;
         }
+        .errors {
+            text-align: center;
+            background-color: v.$red;
+            font-family: v.$font2;
+            margin-top: 5px;
+            color: v.$light-grey;
+            padding: 5px 0;
+        }
         a {
             background-color: v.$transparent-coral;
             color: v.$red;

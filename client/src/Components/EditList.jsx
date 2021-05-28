@@ -123,9 +123,15 @@ export default function EditList({ name, items }) {
 
     //check for item in new and existing items
     const itemExists =
-      items.findIndex((item) => item.name === addNewValue) !== -1 ||
-      newValues.findIndex((item) => item === addNewValue) !== -1 ||
-      changeValues.findIndex((item) => item === addNewValue) !== -1;
+      items.findIndex(
+        (item) => item.name.toUpperCase() === addNewValue.toUpperCase()
+      ) !== -1 ||
+      newValues.findIndex(
+        (item) => item.toUpperCase() === addNewValue.toUpperCase()
+      ) !== -1 ||
+      changeValues.findIndex(
+        (item) => item.toUpperCase() === addNewValue.toUpperCase()
+      ) !== -1;
 
     if (itemExists) {
       setErrors("Item already exists on current list");

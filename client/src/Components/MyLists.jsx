@@ -53,6 +53,9 @@ export default function MyLists(props) {
           {query ? displayQueryLists() : displayLists()}
         </div>
       )}
+      {!props.lists[0] && (
+        <h2 className="noLists">Add some lists with "New List"!</h2>
+      )}
     </div>
   );
 }

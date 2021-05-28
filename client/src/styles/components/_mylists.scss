@@ -34,6 +34,11 @@
             display: none;
         }
     }
+    .noLists {
+        text-align: center;
+        font-family: v.$font2;
+        color: v.$light-blue;
+    }
 }
 
 @media screen and (max-width: 1200px) {

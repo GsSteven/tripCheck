@@ -30,7 +30,9 @@ export default function NewList({ refresh }) {
   const addItem = () => {
     //check item is not already on list and under 50 chars
     const itemExists =
-      currentList.findIndex((item) => item.name === currentValue) !== -1;
+      currentList.findIndex(
+        (item) => item.name.toUpperCase() === currentValue.toUpperCase()
+      ) !== -1;
     if (itemExists) {
       setError(`${currentValue} is already on this list`);
     } else if (currentValue.length > 50) {
