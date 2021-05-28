@@ -47,7 +47,7 @@ export default function MyLists(props) {
             type="text"
             name="findMyList"
             className="findMyList"
-            placeholder="Find List"
+            placeholder="Search Lists"
             onChange={(e) => setQuery(e.target.value)}
           />
           {query ? displayQueryLists() : displayLists()}
