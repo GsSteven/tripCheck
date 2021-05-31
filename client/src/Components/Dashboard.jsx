@@ -53,7 +53,7 @@ export default function Dashboard() {
       window.location.href = "./login";
     }
     //get lists if empty
-    if (!lists) getLists();
+    if (!lists[0]) getLists();
   }, [lists]);
 
   return (
