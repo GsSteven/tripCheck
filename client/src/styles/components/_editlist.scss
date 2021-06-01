@@ -3,13 +3,18 @@
 .editListWrapper {
     position: relative;
     width: 100%;
-    max-height: 600px;
+    height: 95%;
     border: 1px solid v.$red;
     background-color: v.$light-grey;
     cursor: default;
     overflow-x: hidden;
     overflow-y: scroll;
     padding-bottom: 10px;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+        display: none;
+    }
     .editListName {
         font-size: 20px;
         font-family: v.$font2;
