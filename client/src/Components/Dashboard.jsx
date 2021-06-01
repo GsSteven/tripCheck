@@ -8,6 +8,7 @@ import axios from "axios";
 export default function Dashboard() {
   const [currentPage, setCurrentPage] = useState("myLists");
   const [lists, setLists] = useState([]);
+  const [errors, setErrors] = useState("");
 
   const shadeRef = useRef();
 
@@ -41,9 +42,16 @@ export default function Dashboard() {
   };
 
   const getLists = () => {
-    axios.get("/api/lists").then((response) => {
-      setLists(response.data);
-    });
+    axios
+      .get("/api/lists")
+      .then((response) => {
+        //if user does not have lists yet return to prevent rerender
+        if (!response.data[0]) return;
+        setLists(response.data);
+      })
+      .catch((error) => {
+        setErrors("Error: could not get lists");
+      });
   };
 
   useEffect(() => {
@@ -71,6 +79,7 @@ export default function Dashboard() {
         </button>
       </header>
       <NavBar setCurrentPage={setCurrentPage} />
+      {errors && <p className="displayErrors"> {errors}</p>}
       {getCurrentPage()}
       <div className="backgroundShade" ref={shadeRef}></div>
     </div>

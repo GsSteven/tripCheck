@@ -36,6 +36,14 @@ header {
     }
 }
 
+.displayErrors {
+    font-family: v.$font2;
+    font-size: 20px;
+    background-color: v.$transparent-red;
+    padding: 10px 0;
+    text-align: center;
+}
+
 @media screen and (max-width: 600px) {
     header {
         button {
