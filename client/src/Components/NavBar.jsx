@@ -46,6 +46,9 @@ function NavBar(props) {
   const handleClick = (e) => {
     const value = e.target.id;
     props.setCurrentPage(value);
+    if (window.innerWidth < 1000) {
+      expandNav();
+    }
   };
 
   useEffect(() => {
