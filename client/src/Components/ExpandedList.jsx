@@ -37,7 +37,12 @@ export default function ExpandedList({
   };
 
   const displayItems = () => {
-    const listElements = items.map((item, index) => {
+    //move unchecked items to front of array
+    const uncheckedFirst = items.sort((x, y) => {
+      return !x.checked ? -1 : !y.checked ? 1 : 0;
+    });
+    //list elements to return
+    const listElements = uncheckedFirst.map((item, index) => {
       return (
         <li className="expandedItem" key={item.name + index}>
           <label className="checkContainer">
