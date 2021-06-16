@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 import { loginUser } from "./../componentUtil/logUser";
 
 export default function Login() {
@@ -33,10 +34,13 @@ export default function Login() {
 
   return (
     <div className="loginWrapper">
-      <form
+      <motion.form
         onSubmit={submitUser}
         className="className"
         onKeyPress={handleKeyPress}
+        initial={{ y: -400, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.7, type: "spring", stiffness: 80 }}
       >
         <h1>
           <u>Trip Check</u>
@@ -62,7 +66,7 @@ export default function Login() {
         <a href="./Register" className="registerLink">
           Register here
         </a>
-      </form>
+      </motion.form>
     </div>
   );
 }

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { motion } from "framer-motion";
 import axios from "axios";
 
 export default function NewList({ refresh }) {
@@ -11,7 +12,13 @@ export default function NewList({ refresh }) {
   const getCurrentList = () => {
     const listElements = currentList.map((listItem, index) => {
       return (
-        <li className="listItem" key={listItem.name + index}>
+        <motion.li
+          className="listItem"
+          key={listItem.name + index}
+          initial={{ y: -25 }}
+          animate={{ y: 0 }}
+          transition={{ duration: 0.3, type: "tween" }}
+        >
           {listItem.name}
           <button
             className="removeItem"
@@ -21,7 +28,7 @@ export default function NewList({ refresh }) {
           >
             X
           </button>
-        </li>
+        </motion.li>
       );
     });
     return listElements;

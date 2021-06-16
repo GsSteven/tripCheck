@@ -1,4 +1,5 @@
 import React, { useState, useRef } from "react";
+import { motion } from "framer-motion";
 import axios from "axios";
 
 //img imports
@@ -120,7 +121,12 @@ export default function ExpandedList({
   };
 
   return (
-    <div className="expandedListWrapper">
+    <motion.div
+      className="expandedListWrapper"
+      initial={{ y: -100, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.3, type: "tween" }}
+    >
       <div className="expandedList">
         <button
           type="button"
@@ -181,6 +187,6 @@ export default function ExpandedList({
         </h1>
         <ul className="itemsList">{displayItems()}</ul>
       </div>
-    </div>
+    </motion.div>
   );
 }
