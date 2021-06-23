@@ -14,7 +14,7 @@ export default function NewList({ refresh }) {
       return (
         <motion.li
           className="listItem"
-          key={listItem.name + index}
+          key={listItem.name}
           initial={{ y: -25 }}
           animate={{ y: 0 }}
           transition={{ duration: 0.3, type: "tween" }}
@@ -105,6 +105,7 @@ export default function NewList({ refresh }) {
           name="name"
           id="name"
           value={listName}
+          required
           onChange={(e) => setListName(e.target.value)}
         />
         <div className="newItemBox">
