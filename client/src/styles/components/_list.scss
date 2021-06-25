@@ -23,15 +23,16 @@
         overflow: hidden;
         
         .closeButton {
-            @include v.button1(0, v.$red, v.$font2);
             width: 25px;
             height: 25px;
-            font-weight: 900;
             position: relative;
             top: 35px;
             left: 40%;
             z-index: 15;
             cursor: pointer;
+            > path{
+                stroke: v.$red;
+            }
         }
     }
 }
