@@ -112,6 +112,75 @@ export default function List(props) {
       />
     </motion.svg>
   );
+  const closeEditSVG = (
+    <motion.svg
+      onClick={toggleEdit}
+      className="closeButton"
+      viewBox="0 0 100 100"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      transition={{ staggerChildren: 1.5 }}
+    >
+      <motion.path
+        d="
+        M 0, 100
+        l 0, -100 
+        "
+        strokeWidth="20"
+        variants={inOutVariant}
+        initial="hidden"
+        animate="visible"
+      />
+      <motion.path
+        d="
+      M 0, 0
+      l 100, 0
+      "
+        strokeWidth="20"
+        variants={inOutVariant}
+        initial="hidden"
+        animate="visible"
+      />
+      <motion.path
+        d="
+      M 100, 0
+      l 0, 100
+      "
+        strokeWidth="20"
+        variants={inOutVariant}
+        initial="hidden"
+        animate="visible"
+      />
+      <motion.path
+        d="
+      M 100, 100
+      l -100, 0
+      "
+        strokeWidth="20"
+        variants={inOutVariant}
+        initial="hidden"
+        animate="visible"
+      />
+      <motion.path
+        d="
+      M 25, 25
+      l 50, 50
+      "
+        strokeWidth="10"
+        initial={{ pathLength: 0 }}
+        animate={{ pathLength: 1, transition: { duration: 1, delay: 0.75 } }}
+      />
+      <motion.path
+        d="
+      M 75, 25
+      l -50, 50
+      "
+        strokeWidth="10"
+        initial={{ pathLength: 0 }}
+        animate={{ pathLength: 1, transition: { duration: 1, delay: 1.25 } }}
+      />
+    </motion.svg>
+  );
 
   return (
     <div className="listWrapper">
@@ -124,9 +193,7 @@ export default function List(props) {
       )}
       {expandEdit && (
         <div className="editContainer">
-          <button type="button" className="closeButton" onClick={toggleEdit}>
-            X
-          </button>
+          {closeEditSVG}
           <EditList {...props} close={toggleEdit} />
         </div>
       )}
