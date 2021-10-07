@@ -21,9 +21,9 @@ function NavBar(props) {
       navList.style.height = "auto";
       navList.style.right = "0";
       // make mobile options a red X
-      line1.style.transform = "rotate(45deg) translateY(19px)";
+      line1.style.transform = "rotate(45deg) translateY(14px)";
       line2.style.opacity = "0";
-      line3.style.transform = "rotate(-45deg) translateY(-19px)";
+      line3.style.transform = "rotate(-45deg) translateY(-14px)";
       line1.style.backgroundColor = "rgb(126, 7, 7)";
       line3.style.backgroundColor = "rgb(126, 7, 7)";
       setClicked(true);
